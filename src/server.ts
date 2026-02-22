@@ -1,19 +1,73 @@
-import app from "./app"
-import dotenv from "dotenv"
+import dotenv from "dotenv";
+import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
+import morgan from "morgan";
+import rateLimit from "express-rate-limit";
 
-dotenv.config()
+dotenv.config();
 
-const PORT = process.env.PORT || 5000
+const app = express();
 
-const startServer = async () => {
-  try {
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`)
-    })
-  } catch (error) {
-    console.error("❌ Failed to start server:", error)
-    process.exit(1)
-  }
-}
+/*
+|--------------------------------------------------------------------------
+| Middlewares
+|--------------------------------------------------------------------------
+*/
 
-startServer()
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
+
+/*
+|--------------------------------------------------------------------------
+| Rate Limiter
+|--------------------------------------------------------------------------
+*/
+
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 50,
+    message: "Too many requests, please try again later"
+  })
+);
+
+/*
+|--------------------------------------------------------------------------
+| Routes
+|--------------------------------------------------------------------------
+*/
+
+app.get("/", (_req: Request, res: Response) => {
+  res.json({
+    success: true,
+    message: "🚀 LMS API Running"
+  });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Global Error Handler
+|--------------------------------------------------------------------------
+*/
+
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  console.error(err);
+
+  res.status(500).json({
+    success: false,
+    message: "Internal Server Error"
+  });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Start Server
+|--------------------------------------------------------------------------
+*/
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
