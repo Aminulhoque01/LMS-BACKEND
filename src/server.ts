@@ -3,6 +3,7 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
+import AuthRouter from "./models/auth/auth.route";
 
 dotenv.config();
 
@@ -44,6 +45,8 @@ app.get("/", (_req: Request, res: Response) => {
     message: "🚀 LMS API Running"
   });
 });
+
+app.use("/auth",AuthRouter)
 
 /*
 |--------------------------------------------------------------------------
