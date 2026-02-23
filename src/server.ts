@@ -6,6 +6,7 @@ import rateLimit from "express-rate-limit";
 import AuthRouter from "./models/auth/auth.route";
 import CourseRouter from "./models/course/course.route";
 import CategoryRouter from "./models/category/category.route";
+import EnrollRouter from "./models/enrollment/enrollment.route";
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ app.get("/", (_req: Request, res: Response) => {
 app.use("/auth",AuthRouter)
 app.use("/category",CategoryRouter)
 app.use("/course",CourseRouter)
+app.use("/enroll",EnrollRouter)
 
 /*
 |--------------------------------------------------------------------------
