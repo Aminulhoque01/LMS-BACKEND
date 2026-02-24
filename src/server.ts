@@ -55,8 +55,8 @@ app.use("/auth",AuthRouter)
 app.use("/category",CategoryRouter)
 app.use("/course",CourseRouter)
 app.use("/enroll",EnrollRouter)
-app.use("analytics", analyticsRoutes)
-app.use("lesson", LessonRouter)
+app.use("/analytics", analyticsRoutes)
+app.use("/lesson", LessonRouter)
 
 /*
 |--------------------------------------------------------------------------

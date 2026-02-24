@@ -1,5 +1,7 @@
 import { prisma } from "../../config/prisma"
 
+ 
+
 export const createLesson = async (data: any) => {
   return prisma.lesson.create({
     data
@@ -23,4 +25,10 @@ export const markLessonComplete = async (
       enrollmentId
     }
   })
+}
+
+export const lessonService={
+  createLesson,
+  getCourseLessons,
+  markLessonComplete
 }

@@ -28,3 +28,9 @@ export const completeLesson = async (
 
   res.json(result)
 }
+
+export const lessonController ={
+  create,
+  getCourseLessons,
+  completeLesson
+}

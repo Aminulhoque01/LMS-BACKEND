@@ -1,29 +1,29 @@
 import { Router } from "express"
-import * as controller from "./lesson.controller"
  
 import { Role } from "@prisma/client"
 import { authenticate } from "../middlewares/auth.middleware"
 import { authorize } from "../middlewares/role.middleware"
+import { lessonController } from "./lesson.controller"
 
 const LessonRouter = Router()
 
 LessonRouter.post(
   "/",
   authenticate,
-  authorize(Role.INSTRUCTOR),
-  controller.create
+  authorize("INSTRUCTOR"),
+  lessonController.create
 )
 
 LessonRouter.get(
   "/course/:courseId",
   authenticate,
-  controller.getCourseLessons
+  lessonController.getCourseLessons
 )
 
 LessonRouter.post(
   "/complete",
   authenticate,
-  controller.completeLesson
+  lessonController.completeLesson
 )
 
 export default LessonRouter
