@@ -7,6 +7,7 @@ import AuthRouter from "./models/auth/auth.route";
 import CourseRouter from "./models/course/course.route";
 import CategoryRouter from "./models/category/category.route";
 import EnrollRouter from "./models/enrollment/enrollment.route";
+import analyticsRoutes from "./models/analytics/analytics.route";
 
 dotenv.config();
 
@@ -53,6 +54,7 @@ app.use("/auth",AuthRouter)
 app.use("/category",CategoryRouter)
 app.use("/course",CourseRouter)
 app.use("/enroll",EnrollRouter)
+app.use("analytics", analyticsRoutes)
 
 /*
 |--------------------------------------------------------------------------
