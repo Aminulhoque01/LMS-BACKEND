@@ -5,25 +5,25 @@ import { Role } from "@prisma/client"
 import { authenticate } from "../middlewares/auth.middleware"
 import { authorize } from "../middlewares/role.middleware"
 
-const router = Router()
+const LessonRouter = Router()
 
-router.post(
+LessonRouter.post(
   "/",
   authenticate,
   authorize(Role.INSTRUCTOR),
   controller.create
 )
 
-router.get(
+LessonRouter.get(
   "/course/:courseId",
   authenticate,
   controller.getCourseLessons
 )
 
-router.post(
+LessonRouter.post(
   "/complete",
   authenticate,
   controller.completeLesson
 )
 
-export default router
+export default LessonRouter
