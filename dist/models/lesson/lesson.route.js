@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const role_middleware_1 = require("../middlewares/role.middleware");
+const lesson_controller_1 = require("./lesson.controller");
+const LessonRouter = (0, express_1.Router)();
+LessonRouter.post("/", auth_middleware_1.authenticate, (0, role_middleware_1.authorize)("INSTRUCTOR"), lesson_controller_1.lessonController.create);
+LessonRouter.get("/course/:courseId", auth_middleware_1.authenticate, lesson_controller_1.lessonController.getCourseLessons);
+LessonRouter.post("/complete", auth_middleware_1.authenticate, lesson_controller_1.lessonController.completeLesson);
+exports.default = LessonRouter;

@@ -10,7 +10,7 @@ const analyticsRoutes = Router()
 analyticsRoutes.get(
   "/dashboard",
   authenticate,
-  authorize(Role.ADMIN, Role.SUPER_ADMIN),
+  authorize("ADMIN", "SUPER_ADMIN"),
   dashboardStats
 )
 
