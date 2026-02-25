@@ -11,6 +11,9 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const pool = new pg_1.Pool({
     connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 const adapter = new adapter_pg_1.PrismaPg(pool);
 exports.prisma = new client_1.PrismaClient({
